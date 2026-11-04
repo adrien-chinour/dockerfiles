@@ -14,19 +14,19 @@ FROM php:$VERSION-cli-bullseye AS php-cli-bullseye
 RUN apt-get update && apt-get install -y git
 
 
-# @image ghcr.io/phpimages/php-cli-xdebug
+# @image ghcr.io/adrien-chinour/php-cli-xdebug
 # @author Adrien Chinour <github@chinour.fr>
 FROM php-cli-$OS AS php-cli-xdebug
 
 LABEL org.opencontainers.image.created=$BUILD_DATE
-LABEL org.opencontainers.image.source="https://github.com/phpimages/dockerfile"
-LABEL org.opencontainers.image.documentation="https://github.com/phpimages/dockerfile"
-LABEL org.opencontainers.image.url="https://github.com/phpimages"
+LABEL org.opencontainers.image.source="https://github.com/adrien-chinour/dockerfiles"
+LABEL org.opencontainers.image.documentation="https://github.com/adrien-chinour/dockerfiles"
+LABEL org.opencontainers.image.url="https://github.com/adrien-chinour"
 
 LABEL org.opencontainers.image.authors="Adrien Chinour <github@chinour.fr>"
 LABEL org.opencontainers.image.title="php-cli-xdebug"
 LABEL org.opencontainers.image.description="PHP CLI image with xdebug."
-LABEL org.opencontainers.image.base.name="ghcr.io/phpimages/php-cli-xdebug"
+LABEL org.opencontainers.image.base.name="ghcr.io/adrien-chinour/php-cli-xdebug"
 LABEL org.opencontainers.image.version=$VERSION-$OS
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
@@ -36,19 +36,19 @@ RUN install-php-extensions zip xdebug
 WORKDIR /opt
 
 
-# @image ghcr.io/phpimages/php-cli-allinclusive
+# @image ghcr.io/adrien-chinour/php-cli-allinclusive
 # @author Adrien Chinour <github@chinour.fr>
 FROM php-cli-$OS AS php-cli-allinclusive
 
 LABEL org.opencontainers.image.created=$BUILD_DATE
-LABEL org.opencontainers.image.source="https://github.com/phpimages/dockerfile"
-LABEL org.opencontainers.image.documentation="https://github.com/phpimages/dockerfile"
-LABEL org.opencontainers.image.url="https://github.com/phpimages"
+LABEL org.opencontainers.image.source="https://github.com/adrien-chinour/dockerfiles"
+LABEL org.opencontainers.image.documentation="https://github.com/adrien-chinour/dockerfiles"
+LABEL org.opencontainers.image.url="https://github.com/adrien-chinour"
 
 LABEL org.opencontainers.image.authors="Adrien Chinour <github@chinour.fr>"
 LABEL org.opencontainers.image.title="php-cli-xdebug"
 LABEL org.opencontainers.image.description="PHP CLI image with commonly used extensions."
-LABEL org.opencontainers.image.base.name="ghcr.io/phpimages/php-cli-xdebug"
+LABEL org.opencontainers.image.base.name="ghcr.io/adrien-chinour/php-cli-xdebug"
 LABEL org.opencontainers.image.version=$VERSION-$OS
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
@@ -58,19 +58,19 @@ RUN install-php-extensions gd intl yaml redis apcu opcache mcrypt mysqli pgsql p
 WORKDIR /opt
 
 
-# @image ghcr.io/phpimages/phpstan
+# @image ghcr.io/adrien-chinour/phpstan
 # @author Adrien Chinour <github@chinour.fr>
 FROM php-cli-xdebug AS phpstan
 
 LABEL org.opencontainers.image.created=$BUILD_DATE
-LABEL org.opencontainers.image.source="https://github.com/phpimages/dockerfile"
-LABEL org.opencontainers.image.documentation="https://github.com/phpimages/dockerfile"
-LABEL org.opencontainers.image.url="https://github.com/phpimages"
+LABEL org.opencontainers.image.source="https://github.com/adrien-chinour/dockerfiles"
+LABEL org.opencontainers.image.documentation="https://github.com/adrien-chinour/dockerfiles"
+LABEL org.opencontainers.image.url="https://github.com/adrien-chinour"
 
 LABEL org.opencontainers.image.authors="Adrien Chinour <github@chinour.fr>"
 LABEL org.opencontainers.image.title="phpstan"
 LABEL org.opencontainers.image.description="PHP CLI image with phpstan available."
-LABEL org.opencontainers.image.base.name="ghcr.io/phpimages/phpstan"
+LABEL org.opencontainers.image.base.name="ghcr.io/adrien-chinour/phpstan"
 LABEL org.opencontainers.image.version=$VERSION-$OS
 
 RUN composer global require phpstan/phpstan

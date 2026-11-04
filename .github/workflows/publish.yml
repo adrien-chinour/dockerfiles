@@ -43,5 +43,5 @@ jobs:
                         BUILD_DATE=${{ steps.date.outputs.date }}
                         OS=${{ matrix.os }}
                     target: ${{ matrix.stage }}
-                    tags: ${{ env.REGISTRY }}/phpimages/${{ matrix.stage }}:${{ matrix.version }}-${{ matrix.os }}
+                    tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ matrix.stage }}:${{ matrix.version }}-${{ matrix.os }}
                     push: true
