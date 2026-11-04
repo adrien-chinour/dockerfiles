@@ -1,3 +1,4 @@
+# VERSION: PHP version (7.4, 8.4, 8.5). OS: Debian codename (bullseye, trixie).
 ARG VERSION
 ARG OS
 
@@ -6,18 +7,16 @@ ARG OS
 FROM php:$VERSION-cli-$OS AS base
 
 RUN set -eux; \
-    if command -v apk >/dev/null; then \
-        apk add --no-cache git; \
-    else \
-        if grep -qs bullseye /etc/apt/sources.list; then \
-            # Debian 11 is end-of-life: its packages moved to archive.debian.org
-            sed -i 's|deb.debian.org|archive.debian.org|g' /etc/apt/sources.list; \
-            echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/99archive; \
-        fi; \
-        apt-get update; \
-        apt-get install -y --no-install-recommends git; \
-        rm -rf /var/lib/apt/lists/*; \
-    fi
+    if grep -qs bullseye /etc/apt/sources.list; then \
+        # Debian 11 is end-of-life: its packages moved to archive.debian.org
+        sed -i 's|deb.debian.org|archive.debian.org|g' /etc/apt/sources.list; \
+        echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/99archive; \
+    fi; \
+    apt-get update; \
+    # Daily rebuilds publish the latest Debian security fixes even before the base image is rebuilt
+    apt-get upgrade -y --no-install-recommends; \
+    apt-get install -y --no-install-recommends git; \
+    rm -rf /var/lib/apt/lists/*
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
