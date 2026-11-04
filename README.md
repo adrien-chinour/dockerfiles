@@ -11,13 +11,26 @@ See [Packages section](https://github.com/adrien-chinour?tab=packages)
 > [!TIP]
 > All images has composer installed
 
+### Tags
+
+Each image is published as `<php version>-<os>`:
+
+| PHP | Alpine        | Debian          |
+|-----|---------------|-----------------|
+| 7.4 | `7.4-alpine`  | `7.4-bullseye`  |
+| 8.4 | `8.4-alpine`  | `8.4-trixie`    |
+| 8.5 | `8.5-alpine`  | `8.5-trixie`    |
+
+_PHP 7.4 official images only exist on Debian 11 (bullseye), which is end-of-life: its packages are fetched from `archive.debian.org`._
 
 ## Usage
 
+### Run composer
+
 ```shell
 # Run composer install with any php version. 
-# Example 8.2 : ghcr.io/adrien-chinour/php-cli-xdebug:8.2-alpine
-docker run -v .:/opt -u $(id -u):$(id -g) ghcr.io/adrien-chinour/php-cli-xdebug:8.2-alpine composer install 
+# Example 8.4 : ghcr.io/adrien-chinour/php-cli-xdebug:8.4-alpine
+docker run -v .:/opt -u $(id -u):$(id -g) ghcr.io/adrien-chinour/php-cli-xdebug:8.4-alpine composer install 
 ```
 
 _`WORKDIR` is `/opt` on each images use `-v` to map your current dir with `/opt`._
